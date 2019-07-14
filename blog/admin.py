@@ -10,6 +10,8 @@ class PostAdmin(admin.ModelAdmin):
         'updated',
     )
 
+    prepopulated_fields = {'slug': ('title',)}
+
     search_fields = (
         'title',
         'author__username',
