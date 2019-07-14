@@ -27,6 +27,11 @@ class Post(models.Model):
         help_text='Set to "published" to make this post publicly visible',
     )
     content = models.TextField()
+    published = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text='The date & time this article was published'
+    )
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
 
