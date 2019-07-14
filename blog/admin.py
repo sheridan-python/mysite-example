@@ -9,5 +9,9 @@ class PostAdmin(admin.ModelAdmin):
         'updated',
     )
 
+    search_fields = (
+        'title',
+    )
+
 
 admin.site.register(models.Post, PostAdmin)
