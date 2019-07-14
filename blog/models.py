@@ -15,14 +15,14 @@ class Post(models.Model):
 
     title = models.CharField(max_length=255)
     slug = models.SlugField(
-        null=True,
+        null=False,
         unique_for_date='published',
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,  # The Django auth user model
         on_delete=models.PROTECT,  # Prevent posts from being deleted
         related_name='blog_posts',
-        null=True,
+        null=False,
     )
     status = models.CharField(
         max_length=10,
