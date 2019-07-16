@@ -2,6 +2,21 @@ from django.conf import settings
 from django.db import models
 
 
+class Topic(models.Model):
+    name = models.CharField(
+        max_length=50,
+        unique=True  # No duplicates!
+    )
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        ordering = ['name']
+
+
 class Post(models.Model):
     """
     Represents a blog post
@@ -29,6 +44,10 @@ class Post(models.Model):
         choices=STATUS_CHOICES,
         default=DRAFT,
         help_text='Set to "published" to make this post publicly visible',
+    )
+    topics = models.ManyToManyField(
+        Topic,
+        related_name='blog_posts'
     )
     content = models.TextField()
     published = models.DateTimeField(
