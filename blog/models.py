@@ -17,6 +17,11 @@ class Topic(models.Model):
         ordering = ['name']
 
 
+class PostQuerySet(models.QuerySet):
+    def published(self):
+        return self.filter
+
+
 class Post(models.Model):
     """
     Represents a blog post
@@ -57,6 +62,8 @@ class Post(models.Model):
     )
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
+
+    objects = PostQuerySet.as_manager()
 
     class Meta:
         ordering = ['-created']
