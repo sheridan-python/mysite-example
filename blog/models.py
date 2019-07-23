@@ -21,6 +21,9 @@ class PostQuerySet(models.QuerySet):
     def published(self):
         return self.filter(status=self.model.PUBLISHED)
 
+    def drafts(self):
+        return self.filter(status=self.model.DRAFT)
+
 
 class Post(models.Model):
     """
