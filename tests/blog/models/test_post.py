@@ -30,3 +30,9 @@ def test_draft_posts_only_returns_those_with_draft_status():
     result = list(Post.objects.drafts())
 
     assert result == expected
+
+
+def test_publish_sets_status_to_published():
+    post = mommy.make('blog.Post', status=Post.DRAFT)
+    post.publish()
+    assert post.status == Post.PUBLISHED
