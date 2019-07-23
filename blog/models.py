@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 class Topic(models.Model):
@@ -76,3 +77,4 @@ class Post(models.Model):
 
     def publish(self):
         self.status = self.PUBLISHED
+        self.published = timezone.now()
