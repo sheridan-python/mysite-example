@@ -75,4 +75,4 @@ class Post(models.Model):
         return self.title
 
     def publish(self):
-        pass
+        self.status = self.PUBLISHED
