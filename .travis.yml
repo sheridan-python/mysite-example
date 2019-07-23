@@ -5,5 +5,7 @@ dist: xenial
 install:
   - pip install -r requirements.txt -r test-requirements.txt
 script:
-  - pytest -v
+  - pytest -vv
   - find . -name '*.py' | xargs pylint
+services:
+  - postgresql
