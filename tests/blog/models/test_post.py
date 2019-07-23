@@ -1,3 +1,6 @@
+import datetime as dt
+
+from freezegun import freeze_time
 from model_mommy import mommy
 import pytest
 
@@ -36,3 +39,14 @@ def test_publish_sets_status_to_published():
     post = mommy.make('blog.Post', status=Post.DRAFT)
     post.publish()
     assert post.status == Post.PUBLISHED
+
+
+@freeze_time(dt.datetime(2030, 6, 1, 12), tz_offset=0)  # Replaces now()
+def test_publish_sets_published_to_current_datetime():
+    # Create a new post, and ensure no published datetime is set
+    post = mommy.make('blog.Post', published=None)
+    post.publish()
+    assert post.published == dt.datetime(
+        2030, 6, 1, 12,
+        tzinfo=dt.timezone.utc
+    )
