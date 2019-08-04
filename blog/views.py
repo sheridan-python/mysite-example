@@ -5,4 +5,4 @@ def home(request):
     """
     The Blog homepage
     """
-    return render(request, 'blog/base.html')
+    return render(request, 'blog/home.html')
