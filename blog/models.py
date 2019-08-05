@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 
@@ -26,7 +27,9 @@ class PostQuerySet(models.QuerySet):
         return self.filter(status=self.model.DRAFT)
 
     def get_authors(self):
-        pass
+        User = get_user_model()
+        # Get the users who are authors of this queryset
+        return User.objects.filter(blog_posts__in=self)
 
 
 class Post(models.Model):
