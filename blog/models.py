@@ -25,6 +25,9 @@ class PostQuerySet(models.QuerySet):
     def drafts(self):
         return self.filter(status=self.model.DRAFT)
 
+    def get_authors(self):
+        pass
+
 
 class Post(models.Model):
     """
