@@ -29,7 +29,7 @@ class PostQuerySet(models.QuerySet):
     def get_authors(self):
         User = get_user_model()
         # Get the users who are authors of this queryset
-        return User.objects.filter(blog_posts__in=self)
+        return User.objects.filter(blog_posts__in=self).distinct()
 
 
 class Post(models.Model):
