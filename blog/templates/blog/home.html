@@ -2,12 +2,12 @@
 
 {% block main %}
 <section class="latest-article-preview">
-{% for post in latest_posts %}
-<article>
-  <h2>{{ post.title }}</h2>
-  <em>{{ post.published|timesince }} ago</em>
-  {{ post.content|linebreaks }}
-</article>
-{% endfor %}
-{% endblock %}
+  {% for post in latest_posts %}
+  <article>
+    <h2>{{ post.title }}</h2>
+    <em>{{ post.published|timesince }} ago</em>
+    {{ post.content|linebreaks }}
+  </article>
+  {% endfor %}
 </section>
+{% endblock %}
