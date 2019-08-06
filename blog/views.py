@@ -1,21 +1,9 @@
+from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from . import models
 
 
-class ContextMixin:
-    """
-    Provides common context variables for blog views
-    """
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['authors'] = models.Post.objects.published() \
-            .get_authors() \
-            .order_by('first_name')
-
-        return context
-
-
-class HomeView(ContextMixin, TemplateView):
+class HomeView(TemplateView):
     template_name = 'blog/home.html'
 
     def get_context_data(self, **kwargs):
@@ -29,5 +17,9 @@ class HomeView(ContextMixin, TemplateView):
         return context
 
 
-class AboutView(ContextMixin, TemplateView):
+class AboutView(TemplateView):
     template_name = 'blog/about.html'
+
+
+def terms_and_conditions(request):
+    return render(request, 'blog/terms_and_conditions.html')
