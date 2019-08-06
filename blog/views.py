@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
+from django.views.generic import ListView
 from . import models
 
 
@@ -19,6 +20,11 @@ class HomeView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
+
+
+class PostListView(ListView):
+    model = models.Post
+    context_object_name = 'posts'
 
 
 def terms_and_conditions(request):
