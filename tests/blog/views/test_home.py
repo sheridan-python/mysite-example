@@ -53,4 +53,6 @@ def test_authors_included_in_context_data(client, django_user_model):
     expected = [cosmo, elaine]
 
     response = client.get('/')
-    assert response.context.get('authors') == expected
+    result = response.context.get('authors')
+    # Cast result (QuerySet) to a list
+    assert list(result) == expected
