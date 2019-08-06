@@ -29,3 +29,23 @@ def test_post_list_only_returns_published_articles(client):
     result = response.context.get('posts')
 
     assert list(result) == [published]
+
+
+def test_post_list_returns_latest_first(client):
+    latest = mommy.make(
+        'blog.Post',
+        status=Post.PUBLISHED,
+        published='2020-01-01T00:00:00Z',
+        title='Happy 2020!'
+    )
+    earliest = mommy.make(
+        'blog.Post',
+        status=Post.PUBLISHED,
+        published='2019-01-01T00:00:00Z',
+        title='Happy 2019!',
+    )
+    response = client.get('/posts/')
+    result = response.context.get('posts')
+    expected = [latest, earliest]
+
+    assert list(result) == expected

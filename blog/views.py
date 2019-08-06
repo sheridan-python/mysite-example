@@ -25,7 +25,7 @@ class AboutView(TemplateView):
 class PostListView(ListView):
     model = models.Post
     context_object_name = 'posts'
-    queryset = models.Post.objects.published()
+    queryset = models.Post.objects.published().order_by('-published')
 
 
 def terms_and_conditions(request):
