@@ -74,3 +74,21 @@ a:hover {
   font-size: 0.9rem;
   margin: 2rem 0;
 }
+
+/* Post preview */
+.post-preview {
+  border-bottom: 1px #eee solid;
+}
+.post-preview h2 {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.post-preview time {
+  font-size: 0.9rem;
+  color: #999;
+}
+
+.post-preview section {
+  margin: 1rem 0;
+}
