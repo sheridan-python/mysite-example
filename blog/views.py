@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView
+from django.views.generic import DetailView, ListView
 from . import models
 
 
@@ -20,6 +20,19 @@ class HomeView(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
+
+
+class PostDetailView(DetailView):
+    model = models.Post
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.published().filter(
+            published__year=self.kwargs['year'],
+            published__month=self.kwargs['month'],
+            published__day=self.kwargs['day'],
+        )
+
 
 
 class PostListView(ListView):
