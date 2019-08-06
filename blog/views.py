@@ -1,24 +1,37 @@
 from django.views.generic.base import TemplateView
-from django.shortcuts import render
 from . import models
 
 
-def home(request):
-    """
-    The Blog homepage
-    """
-    latest_posts = models.Post.objects.published().order_by('-published')[:3]
-    authors = models.Post.objects.published() \
-        .get_authors() \
-        .order_by('first_name')
+class HomeView(TemplateView):
+    template_name = 'blog/home.html'
 
-    context = {
-        'authors': authors,
-        'latest_posts': latest_posts
-    }
+    def get_context_data(self, **kwargs):
+        # Get the parent context
+        context = super().get_context_data(**kwargs)
 
-    return render(request, 'blog/home.html', context)
+        latest_posts = models.Post.objects.published() \
+            .order_by('-published')[:3]
+
+        authors = models.Post.objects.published() \
+            .get_authors() \
+            .order_by('first_name')
+
+        # Update the context with our context variables
+        context.update({
+            'authors': authors,
+            'latest_posts': latest_posts
+        })
+
+        return context
 
 
 class AboutView(TemplateView):
     template_name = 'blog/about.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['authors'] = models.Post.objects.published() \
+            .get_authors() \
+            .order_by('first_name')
+
+        return context
