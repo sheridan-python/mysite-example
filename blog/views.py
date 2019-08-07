@@ -26,8 +26,11 @@ class PostDetailView(DetailView):
     model = models.Post
 
     def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.published().filter(
+        queryset = super().get_queryset().published()
+        if 'pk' in self.kwargs:
+            return queryset
+
+        return queryset.filter(
             published__year=self.kwargs['year'],
             published__month=self.kwargs['month'],
             published__day=self.kwargs['day'],

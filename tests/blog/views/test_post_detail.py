@@ -52,3 +52,9 @@ def test_post_detail_returns_404_for_drafts(client):
     )
     response = client.get('/posts/2020/1/1/happy-new-year/')
     assert response.status_code == 404
+
+
+def test_post_detail_by_pk_without_published_date(client):
+    post = mommy.make('blog.Post', status=Post.PUBLISHED)
+    response = client.get(f'/posts/{post.pk}/')
+    assert response.status_code == 200
