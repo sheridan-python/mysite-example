@@ -25,6 +25,13 @@ a:hover {
   text-decoration: underline;
 }
 
+h1 {
+  font-size: 1.6em;
+}
+h2 {
+  font-size: 1.3em;
+}
+
 /* Style the header area */
 #site-header h1 {
   padding: 0;
