@@ -12,7 +12,7 @@
     <section class="teaser">
       {{ post.content|truncatewords:20 }}
     </section>
-    <p><a href="#">Read more &rarr; </a></p>
+    <p><a href="{{ post.get_absolute_url }}">Read more &rarr; </a></p>
   </article>
 {% endfor %}
 
