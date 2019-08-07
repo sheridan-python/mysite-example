@@ -71,3 +71,12 @@ def test_get_authors_returns_unique_users(django_user_model):
     mommy.make('blog.Post', author=author, _quantity=3)
 
     assert list(Post.objects.get_authors()) == [author]
+
+
+def test_get_absolute_url_for_post_with_published_date():
+    post = mommy.make(
+        'blog.Post',
+        published=dt.datetime(2014, 12, 20, tzinfo=dt.timezone.utc),
+        slug='model-instances',
+    )
+    assert post.get_absolute_url() == '/posts/2014/12/20/model-instances/'

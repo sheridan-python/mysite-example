@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 
@@ -80,6 +81,17 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse(
+            'post-detail',
+            kwargs={
+                'year': self.published.year,
+                'month': self.published.month,
+                'day': self.published.day,
+                'slug': self.slug
+            }
+        )
 
     def publish(self):
         self.status = self.PUBLISHED
