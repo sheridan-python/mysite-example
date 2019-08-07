@@ -83,15 +83,17 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse(
-            'post-detail',
-            kwargs={
+        if self.published:
+            kwargs = {
                 'year': self.published.year,
                 'month': self.published.month,
                 'day': self.published.day,
                 'slug': self.slug
             }
-        )
+        else:
+            kwargs = {'pk': self.pk}
+
+        return reverse('post-detail', kwargs=kwargs)
 
     def publish(self):
         self.status = self.PUBLISHED

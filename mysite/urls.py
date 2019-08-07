@@ -12,6 +12,11 @@ urlpatterns = [
         views.PostDetailView.as_view(),
         name='post-detail',
     ),
+    path(
+        'posts/<int:pk>/',
+        views.PostDetailView.as_view(),
+        name='post-detail'
+    ),
     path('terms/', views.terms_and_conditions, name='terms-and-conditions'),
     path('', views.HomeView.as_view(), name='home'),
 ]
