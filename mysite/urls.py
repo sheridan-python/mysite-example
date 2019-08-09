@@ -18,5 +18,6 @@ urlpatterns = [
         name='post-detail'
     ),
     path('terms/', views.terms_and_conditions, name='terms-and-conditions'),
+    path('form-example/', views.form_example, name='form-example'),
     path('', views.HomeView.as_view(), name='home'),
 ]
