@@ -8,43 +8,53 @@
 </head>
 
 <body>
-  <header id="site-header">
-     <h1>My Blog</h1>
-     <p>A blog about awesomeness</p>
-  </header>
+  {% if messages %}
+  <div class="django-messages">
+    {% for message in messages %}
+    <div{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
 
-  <nav id="top-nav">
-    <ul>
-      <li><a href="{% url "home" %}">Home</a></li>
-      <li><a href="{% url "about" %}">About</a></li>
-      <li><a href="{% url "post-list" %}">Posts</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-  </nav>
+  <div class="wrapper">
+    <header id="site-header">
+       <h1>My Blog</h1>
+       <p>A blog about awesomeness</p>
+    </header>
 
-  <main id="main-content">
+    <nav id="top-nav">
+      <ul>
+        <li><a href="{% url "home" %}">Home</a></li>
+        <li><a href="{% url "about" %}">About</a></li>
+        <li><a href="{% url "post-list" %}">Posts</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
 
-    <div>
-      {% block main %}
-      <!-- Content for the main block will be rendered here -->
-      {% endblock %}
-    </div>
+    <main id="main-content">
 
-    <aside id="sidebar">
-      <section id="author-list">
-        <h3>Authors</h3>
-        <ul>
-          {% for author in authors %}
-            <li>{{ author.get_full_name }}</li>
-          {% endfor %}
-        </ul>
-      </section>
-    </aside>
-  </main>
+      <div>
+        {% block main %}
+        <!-- Content for the main block will be rendered here -->
+        {% endblock %}
+      </div>
 
-  <footer id="site-footer">
-    Copyright &copy; {% now 'Y' %} –
-    <a href="{% url "terms-and-conditions" %}">Terms & conditions</a>
-  </footer>
+      <aside id="sidebar">
+        <section id="author-list">
+          <h3>Authors</h3>
+          <ul>
+            {% for author in authors %}
+              <li>{{ author.get_full_name }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <footer id="site-footer">
+      Copyright &copy; {% now 'Y' %} –
+      <a href="{% url "terms-and-conditions" %}">Terms & conditions</a>
+    </footer>
+  </body>
 </body>
 </html>

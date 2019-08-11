@@ -1,6 +1,8 @@
+from django.contrib import messages
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic.base import TemplateView
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, FormView, ListView
 from . import forms, models
 
 
@@ -70,3 +72,17 @@ def form_example(request):
 
     # Return if either an invalid POST or a GET
     return render(request, 'blog/form_example.html', context={'form': form})
+
+
+class FormViewExample(FormView):
+    template_name = 'blog/form_example.html'
+    form_class = forms.ExampleSignupForm
+    success_url = reverse_lazy('home')
+
+    def form_valid(self, form):
+        messages.add_message(
+            self.request,
+            messages.SUCCESS,
+            'Thank you for signing up!'
+        )
+        return super().form_valid(form)
