@@ -6,6 +6,7 @@ from blog import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('about/', views.AboutView.as_view(), name='about'),
+    path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('posts/', views.PostListView.as_view(), name='post-list'),
     path(
         'posts/<int:year>/<int:month>/<int:day>/<slug:slug>/',
