@@ -45,6 +45,11 @@ class Post(models.Model):
     ]
 
     title = models.CharField(max_length=255)
+    banner = models.ImageField(
+        blank=True,
+        null=True,
+        help_text='A banner image for the post'
+    )
     slug = models.SlugField(
         null=False,
         unique_for_date='published',
