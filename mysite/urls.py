@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import include, path
 
 from blog import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('about/', views.AboutView.as_view(), name='about'),
     path('contact/', views.ContactFormView.as_view(), name='contact'),
     path('posts/', views.PostListView.as_view(), name='post-list'),

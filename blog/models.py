@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -70,7 +71,7 @@ class Post(models.Model):
         Topic,
         related_name='blog_posts'
     )
-    content = models.TextField()
+    content = RichTextUploadingField()
     published = models.DateTimeField(
         null=True,
         blank=True,
