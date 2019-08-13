@@ -28,5 +28,6 @@ urlpatterns = [
         views.FormViewExample.as_view(),
         name='formview-example'
     ),
+    path('api/', include('api.urls')),
     path('', views.HomeView.as_view(), name='home'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
