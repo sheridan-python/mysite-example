@@ -1,4 +1,5 @@
 from django import forms
+from . import models
 
 
 class ExampleSignupForm(forms.Form):
@@ -19,3 +20,20 @@ class ExampleSignupForm(forms.Form):
         required=False,
         label='Do you wish to receive our newsletter?'
     )
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = models.Comment
+        fields = [
+            'post',
+            'name',
+            'email',
+            'text',
+        ]
+        labels = {
+            'text': 'Comment'
+        }
+        widgets = {
+            'post': forms.HiddenInput()
+        }

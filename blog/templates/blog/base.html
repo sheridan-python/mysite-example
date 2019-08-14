@@ -55,6 +55,11 @@
       Copyright &copy; {% now 'Y' %} –
       <a href="{% url "terms-and-conditions" %}">Terms & conditions</a>
     </footer>
+
+    {% block js %}
+      <script src="{% static "blog/comments.js" %}"></script>
+    {% endblock %}
+
   </body>
 </body>
 </html>
